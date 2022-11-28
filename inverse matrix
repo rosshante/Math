@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+const int N = 3;
+
+double det(int A[N][N])
+{
+	return A[0][0] * A[1][1] * A[2][2] +
+		A[0][1] * A[1][2] * A[2][0] +
+		A[1][0] * A[2][1] * A[0][2] -
+		A[2][0] * A[1][1] * A[0][2] -
+		A[1][0] * A[0][1] * A[2][2] -
+		A[2][1] * A[1][2] * A[0][0];
+}
+
+int main()
+{
+	int A[N][N] =
+	{
+		10, 1, 1,
+		2, 10, 1,
+		2, 2, 10
+	};
+
+	int B[N] =
+	{
+		12,
+		13,
+		14
+	};
+
+	double X[N];
+	int T[N][N];
+
+	double detA;
+	int n;
+	int i, j;
+
+	detA = det(A);
+
+	for (n = 0; n < N; n++)
+	{
+		for (i = 0; i < N; i++)
+			for (j = 0; j < N; j++)
+				T[i][j] = A[i][j];
+
+		for (j = 0; j < N; j++)
+			T[j][n] = B[j];
+
+		X[n] = det(T) / detA;
+	}
+
+	for (i = 0; i < N; i++)
+		cout << "X[" << i << "] = " << X[i] << "\t";
+
+	cout << endl;
+	system("pause");
+	return 0;
+}
